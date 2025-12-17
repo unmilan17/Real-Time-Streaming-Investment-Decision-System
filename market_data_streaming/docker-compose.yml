@@ -1,0 +1,237 @@
+# ==================================================
+# MARKET DATA STREAMING - Port Summary:
+#   MongoDB:       27018
+#   Mongo Express: 8082
+#   Market API:    8001
+#   Zookeeper:     2182
+#   Kafka:         9094
+#   Kafka UI:      8083
+# ==================================================
+networks:
+  market-network:
+    driver: bridge
+
+services:
+  # ==========================================
+  # MONGODB SERVICES
+  # ==========================================
+  
+  # MongoDB Service with Initialization
+  mongodb-market:
+    image: mongo:7.0
+    container_name: mongodb-market
+    hostname: mongodb-market
+    environment:
+      MONGO_INITDB_DATABASE: market_db
+    ports:
+      - "27018:27017"
+    networks:
+      - market-network
+    volumes:
+      - mongodb_market_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: mongod --logpath /var/log/mongodb/mongod.log --logappend
+
+  # Mongo Express (Web UI for MongoDB)
+  mongo-express-market:
+    image: mongo-express:latest
+    container_name: mongo-express-market
+    depends_on:
+      mongodb-market:
+        condition: service_healthy
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb-market
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    ports:
+      - "8082:8081"
+    networks:
+      - market-network
+
+  # ==========================================
+  # KAFKA SERVICES (Different ports to avoid conflicts)
+  # ==========================================
+
+  zookeeper-market:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper-market
+    hostname: zookeeper-market
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2182:2181"
+    networks:
+      - market-network
+    volumes:
+      - zookeeper_market_data:/var/lib/zookeeper/data
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka-market:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka-market
+    hostname: kafka-market
+    depends_on:
+      zookeeper-market:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-market:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-market:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_LOG_DIRS: /tmp/kafka/logs
+    ports:
+      - "9094:9092"
+    networks:
+      - market-network
+    volumes:
+      - kafka_market_data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  kafka-ui-market:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui-market
+    depends_on:
+      kafka-market:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: market-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-market:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper-market:2181
+    ports:
+      - "8083:8080"
+    networks:
+      - market-network
+
+  # ==========================================
+  # MARKET DATA STREAMING SERVICES
+  # ==========================================
+
+  # Market Data Streaming (CSV -> Pathway -> MongoDB)
+  market-stream:
+    build:
+      context: ./market_stream_src
+    container_name: market-stream
+    depends_on:
+      mongodb-market:
+        condition: service_healthy
+    environment:
+      CSV_PATH: /app/data/market_data.csv
+      SPEEDUP: 10.0
+      MONGODB_URI: mongodb://mongodb-market:27017
+      MONGODB_DATABASE: market_db
+      MONGODB_RAW_COLLECTION: ohlcv_raw
+      MONGODB_FEATURES_COLLECTION: market_features
+      WINDOW_SIZE_MS: 300000  # 5 minutes
+    volumes:
+      - ./data:/app/data:ro
+    networks:
+      - market-network
+    restart: on-failure
+
+  # Market Data Backend API
+  market-backend:
+    build:
+      context: ./backend_market_data
+    container_name: market-backend
+    depends_on:
+      mongodb-market:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongodb-market:27017
+      MONGODB_DATABASE: market_db
+      MONGODB_RAW_COLLECTION: ohlcv_raw
+      MONGODB_FEATURES_COLLECTION: market_features
+    ports:
+      - "8001:8000"
+    networks:
+      - market-network
+    restart: unless-stopped
+
+  # ==========================================
+  # KAFKA-BASED MARKET DATA PIPELINE
+  # ==========================================
+
+  # Market Replay Producer (CSV -> Kafka)
+  market-replay-producer:
+    build:
+      context: ./producer_src
+    container_name: market-replay-producer
+    depends_on:
+      kafka-market:
+        condition: service_healthy
+    environment:
+      BOOTSTRAP_SERVERS: kafka-market:9092
+      TOPIC_NAME: market-data-stocks
+      CSV_PATH: /app/data/market_data.csv
+      SPEEDUP: 10.0
+      MAX_WORKERS: 8
+      NUM_PARTITIONS: 3
+    volumes:
+      - ./data:/app/data:ro
+    networks:
+      - market-network
+    restart: on-failure
+
+  # Kafka Consumer (Kafka -> Local Files + MongoDB)
+  consumer-stocks-market:
+    build:
+      context: ./consumer_src
+    container_name: consumer-stocks-market
+    depends_on:
+      kafka-market:
+        condition: service_healthy
+      mongodb-market:
+        condition: service_healthy
+    environment:
+      BOOTSTRAP_SERVERS: kafka-market:9092
+      TOPIC_NAME: market-data-stocks
+      OUTPUT_DIR: /app/output
+      CONSUMER_ID: stocks-consumer
+      CONSUMER_GROUP: stocks-group
+      MONGODB_URI: mongodb://mongodb-market:27017
+      MONGODB_DATABASE: market_db
+      MONGODB_COLLECTION: ohlcv_raw
+      S3_BUCKET: ${S3_BUCKET:-market-data-bucket}
+      S3_PREFIX: ${S3_PREFIX:-raw-data}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+    volumes:
+      - ./consumer_output:/app/output
+    networks:
+      - market-network
+    restart: unless-stopped
+
+# ==========================================
+# VOLUMES
+# ==========================================
+
+volumes:
+  mongodb_market_data:
+    driver: local
+  zookeeper_market_data:
+    driver: local
+  kafka_market_data:
+    driver: local

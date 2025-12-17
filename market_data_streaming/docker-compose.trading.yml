@@ -1,0 +1,120 @@
+# ==================================================
+# TRADING SIMULATION - Port Summary:
+#   MongoDB:       27020
+#   Mongo Express: 8085
+#   Trading API:   8090
+# ==================================================
+version: '3.8'
+
+# ==========================================
+# LIVE TRADING SIMULATION ENGINE
+# ==========================================
+# A complete trading simulation with:
+# - Pathway streaming (market_processing.py)
+# - MongoDB storage (live_features, portfolio_stats)
+# - FastAPI backend (port 8090)
+
+networks:
+  market_net:
+    driver: bridge
+
+services:
+  # ==========================================
+  # MONGODB SERVICE
+  # ==========================================
+  
+  mongo:
+    image: mongo:7.0
+    container_name: mongo-trading
+    hostname: mongo
+    environment:
+      MONGO_INITDB_DATABASE: market_db
+    ports:
+      - "27020:27017"
+    networks:
+      - market_net
+    volumes:
+      - mongo_trading_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Mongo Express UI for trading MongoDB
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express-trading
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    ports:
+      - "8085:8081"
+    networks:
+      - market_net
+
+  # ==========================================
+  # MARKET PRODUCER (Pathway Stream)
+  # ==========================================
+  
+  market_producer:
+    build:
+      context: ./market_stream_src
+      dockerfile: Dockerfile.trading
+    container_name: market-producer
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      CSV_PATH: /app/data/market_data.csv
+      SPEEDUP: "10.0"
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: market_db
+      MONGODB_FEATURES_COLLECTION: live_features
+      MONGODB_STATS_COLLECTION: portfolio_stats
+      INITIAL_CASH: "10000.0"
+      OUTPUT_DIR: /app/output
+    volumes:
+      - ./data:/app/data:ro
+      - ./output:/app/output
+    networks:
+      - market_net
+    restart: on-failure
+
+  # ==========================================
+  # MARKET BACKEND (FastAPI)
+  # ==========================================
+  
+  market_backend:
+    build:
+      context: ./backend_market_data
+      dockerfile: Dockerfile.trading
+    container_name: market-backend-trading
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: market_db
+      MONGODB_FEATURES_COLLECTION: live_features
+      MONGODB_STATS_COLLECTION: portfolio_stats
+      INITIAL_CASH: "10000.0"
+    ports:
+      - "8090:8000"
+    networks:
+      - market_net
+    restart: unless-stopped
+
+# ==========================================
+# VOLUMES
+# ==========================================
+
+volumes:
+  mongo_trading_data:
+    driver: local

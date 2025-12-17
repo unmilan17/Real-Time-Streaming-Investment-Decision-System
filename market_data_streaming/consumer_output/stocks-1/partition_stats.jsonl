@@ -1,0 +1,5 @@
+{"partition_id":1,"message_count":1,"avg_price":252.92,"total_volume":695740,"diff":1,"time":1761499386602}
+{"partition_id":1,"message_count":1,"avg_price":252.92,"total_volume":695740,"diff":-1,"time":1761499445602}
+{"partition_id":1,"message_count":2,"avg_price":252.92,"total_volume":1391480,"diff":1,"time":1761499445602}
+{"partition_id":1,"message_count":2,"avg_price":252.92,"total_volume":1391480,"diff":-1,"time":1761499508602}
+{"partition_id":1,"message_count":3,"avg_price":252.92,"total_volume":2087220,"diff":1,"time":1761499508602}
