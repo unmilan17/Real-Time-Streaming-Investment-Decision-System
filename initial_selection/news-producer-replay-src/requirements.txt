@@ -1,0 +1,2 @@
+pathway>=0.26.0
+confluent-kafka>=2.3.0

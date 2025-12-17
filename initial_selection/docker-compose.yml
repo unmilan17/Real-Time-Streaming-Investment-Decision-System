@@ -1,0 +1,186 @@
+# ==================================================
+# NEWS STREAMING - Port Summary:
+#   MongoDB:       27017
+#   Mongo Express: 8081
+#   News API:      8000
+#   Zookeeper:     2181
+#   Kafka:         9092
+#   Kafka UI:      8080
+# ==================================================
+version: '3.9'
+
+networks:
+  kafka-network:
+    driver: bridge
+
+services:
+  # MongoDB Service with Initialization
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    hostname: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: news_database
+    ports:
+      - "27017:27017"
+    networks:
+      - kafka-network
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Remove the --quiet flag to see logs
+    command: mongod --logpath /var/log/mongodb/mongod.log --logappend
+
+  # Mongo Express (Web UI for MongoDB)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      # If you enabled MongoDB auth, add:
+      # ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      # ME_CONFIG_MONGODB_ADMINPASSWORD: admin123
+    ports:
+      - "8081:8081"
+    networks:
+      - kafka-network
+
+  # News Backend
+  news-backend:
+    build:
+      context: ./backend_news
+      dockerfile: Dockerfile
+    container_name: news-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+    networks:
+      - kafka-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    hostname: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_DATA_DIR: /tmp/zookeeper/data
+      ZOOKEEPER_LOG_DIR: /tmp/zookeeper/logs
+    ports:
+      - "2181:2181"
+    networks:
+      - kafka-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    hostname: kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_LOG_DIRS: /tmp/kafka/logs
+    ports:
+      - "9092:9092"
+    networks:
+      - kafka-network
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    ports:
+      - "8080:8080"
+    networks:
+      - kafka-network
+
+  replay-producer:
+    build:
+      context: ./news-producer-replay-src
+    container_name: replay-producer
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      TOPIC_STOCKS_NEWS: news-stocks
+      TOPIC_CRYPTO_NEWS: news-crypto
+      TOPIC_COMMODITIES_NEWS: news-commodities
+      TOPIC_FOREX_NEWS: news-forex
+      CSV_PATH: /app/output/news_data.csv
+      SPEEDUP: 10.0
+    volumes:
+      - ./output:/app/output
+
+    networks:
+      - kafka-network
+    restart: on-failure
+
+  consumer-stocks:
+    build:
+      context: ./news_consumer_src
+    # container_name removed so scaling works
+    depends_on:
+      kafka:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      TOPIC_NAME: news-stocks
+      OUTPUT_DIR: /app/output
+      CONSUMER_ID: consumer-stocks
+      CONSUMER_GROUP: pathway-news-consumer-group
+      MONGODB_URI: mongodb://mongodb:27017
+      MONGODB_DATABASE: news_database
+      MONGODB_COLLECTION: news_collection
+    volumes:
+      - ./output-replay:/app/output
+    networks:
+      - kafka-network
+    restart: on-failure
+
+volumes:
+  mongodb_data:
+    driver: local

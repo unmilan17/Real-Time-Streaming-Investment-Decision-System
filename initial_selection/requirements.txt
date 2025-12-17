@@ -1,0 +1,8 @@
+pathway>=0.26.0
+confluent-kafka>=2.3.0
+google-generativeai>=0.3.3
+requests>=2.32.3
+pymongo>=4.7.1
+
+
+
