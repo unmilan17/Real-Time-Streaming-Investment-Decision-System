@@ -1,0 +1,55 @@
+--- FILING METADATA ---
+1\. Name and Address of Reporting Person*| LEVINSON ARTHUR D  
+---  
+* * *
+(Last) | (First) | (Middle)  
+---|---|---  
+ONE APPLE PARK WAY  
+---  
+* * *
+(Street) CUPERTINO | CA | 95014  
+---|---|---  
+* * *
+(City) | (State) | (Zip)  
+---|---|---  
+2\. Issuer Name **and** Ticker or Trading Symbol   
+Apple Inc. [ AAPL ]  |  5\. Relationship of Reporting Person(s) to Issuer   
+(Check all applicable) | X | Director |  | 10% Owner  
+---|---|---|---  
+| Officer (give title below) |  | Other (specify below)  
+|  |  |   
+3\. Date of Earliest Transaction (Month/Day/Year)  
+02/25/2025  
+4\. If Amendment, Date of Original Filed (Month/Day/Year)  
+|  6\. Individual or Joint/Group Filing (Check Applicable Line)  | X | Form filed by One Reporting Person  
+---|---  
+| Form filed by More than One Reporting Person
+
+**Table I - Non-Derivative Securities Acquired, Disposed of, or Beneficially Owned**  
+---  
+1\. Title of Security (Instr. 3)  | 2\. Transaction Date (Month/Day/Year) | 2A. Deemed Execution Date, if any (Month/Day/Year) | 3\. Transaction Code (Instr. 8)  | 4\. Securities Acquired (A) or Disposed Of (D) (Instr. 3, 4 and 5)  | 5\. Amount of Securities Beneficially Owned Following Reported Transaction(s) (Instr. 3 and 4)  | 6\. Ownership Form: Direct (D) or Indirect (I) (Instr. 4)  | 7\. Nature of Indirect Beneficial Ownership (Instr. 4)   
+Code | V | Amount | (A) or (D) | Price
+
+**Table II - Derivative Securities Acquired, Disposed of, or Beneficially Owned**  
+**(e.g., puts, calls, warrants, options, convertible securities)**  
+---  
+1\. Title of Derivative Security (Instr. 3)  | 2\. Conversion or Exercise Price of Derivative Security  | 3\. Transaction Date (Month/Day/Year) | 3A. Deemed Execution Date, if any (Month/Day/Year) | 4\. Transaction Code (Instr. 8)  | 5\. Number of Derivative Securities Acquired (A) or Disposed of (D) (Instr. 3, 4 and 5)  | 6\. Date Exercisable and Expiration Date (Month/Day/Year) | 7\. Title and Amount of Securities Underlying Derivative Security (Instr. 3 and 4)  | 8\. Price of Derivative Security (Instr. 5)  | 9\. Number of derivative Securities Beneficially Owned Following Reported Transaction(s) (Instr. 4)  | 10\. Ownership Form: Direct (D) or Indirect (I) (Instr. 4)  | 11\. Nature of Indirect Beneficial Ownership (Instr. 4)   
+Code | V | (A) | (D) | Date Exercisable | Expiration Date | Title | Amount or Number of Shares  
+Restricted Stock Unit(1) | (2) | 02/25/2025 |  | A |  | 1,113 |  |  02/01/2026(3) |  02/01/2026(3) | Common Stock | 1,113 |  $0 | 1,113 | D | 
+
+**Explanation of Responses:**  
+---  
+1\. Automatic grant pursuant to the Apple Inc. Non-Employee Director Stock Plan.  
+2\. Each restricted stock unit represents the right to receive, at settlement, one share of common stock.  
+3\. 100% of these restricted stock units are scheduled to vest on February 1, 2026, assuming continued service through the vesting date.  
+**Remarks:**
+
+--- SIGNATURES ---
+| _/s/ Sam Whittington, Attorney-in-Fact for Arthur D. Levinson_ | _02/27/2025_  
+---|---|---  
+| ** Signature of Reporting Person | Date  
+Reminder: Report on a separate line for each class of securities beneficially owned directly or indirectly.  
+* If the form is filed by more than one reporting person, _see_ Instruction 4 (b)(v).  
+** Intentional misstatements or omissions of facts constitute Federal Criminal Violations _See_ 18 U.S.C. 1001 and 15 U.S.C. 78ff(a).  
+Note: File three copies of this Form, one of which must be manually signed. If space is insufficient, _see_ Instruction 6 for procedure.  
+**Persons who respond to the collection of information contained in this form are not required to respond unless the form displays a currently valid OMB Number.**

@@ -1,0 +1,13 @@
+{
+  "ticker": "AAPL",
+  "cik": "0000320193",
+  "doc_type": "filing",
+  "doc_id": "0001462356-25-000010",
+  "date": "2025-10-01",
+  "filing_date": "2025-10-03",
+  "source_file": "0001462356-25-000010.html",
+  "reporting_person": "ADAMS KATHERINE L.",
+  "is_amendment": false,
+  "total_transaction_value": 12101153.94,
+  "num_transactions": 6
+}

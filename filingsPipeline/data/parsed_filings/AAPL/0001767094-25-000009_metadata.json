@@ -1,0 +1,13 @@
+{
+  "ticker": "AAPL",
+  "cik": "0000320193",
+  "doc_type": "filing",
+  "doc_id": "0001767094-25-000009",
+  "date": "2025-10-01",
+  "filing_date": "2025-10-03",
+  "source_file": "0001767094-25-000009.html",
+  "reporting_person": "O'BRIEN DEIRDRE",
+  "is_amendment": false,
+  "total_transaction_value": 11071078.48,
+  "num_transactions": 4
+}

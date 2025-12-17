@@ -1,0 +1,159 @@
+{
+  "filing_metadata": {
+    "earliest_transaction_date": "2025-10-15",
+    "filing_date": "2025-10-17",
+    "is_amendment": false,
+    "source_file": "0002050912-25-000008.html"
+  },
+  "issuer": {
+    "company_name": "Apple Inc.",
+    "ticker_symbol": "AAPL",
+    "cik": "0000320193"
+  },
+  "reporting_person": {
+    "name": "Parekh Kevan",
+    "relationship_to_issuer": [
+      "Officer"
+    ],
+    "officer_title": "Senior Vice President, CFO",
+    "address": {
+      "street": "ONE APPLE PARK WAY",
+      "city": "CUPERTINO",
+      "state": "CA",
+      "zip": "95014"
+    }
+  },
+  "transactions": [
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "shares_traded": 16457,
+      "acquisition_or_disposition": "A",
+      "price_per_share": null,
+      "shares_owned_after": 21026,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": false
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-15",
+      "transaction_code": "F",
+      "shares_traded": 8062,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 249.34,
+      "shares_owned_after": 12964,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": false
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-16",
+      "transaction_code": "S",
+      "shares_traded": 500,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 245.89,
+      "shares_owned_after": 12464,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": true
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-16",
+      "transaction_code": "S",
+      "shares_traded": 1665,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 247.04,
+      "shares_owned_after": 10799,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": true
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-16",
+      "transaction_code": "S",
+      "shares_traded": 1534,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 247.82,
+      "shares_owned_after": 9265,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": true
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-16",
+      "transaction_code": "S",
+      "shares_traded": 500,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 248.73,
+      "shares_owned_after": 8765,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": true
+    }
+  ],
+  "derivative_transactions": [
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 5530,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 5530,
+      "price": null,
+      "beneficially_owned_after": 0,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    },
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 5816,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 5816,
+      "price": null,
+      "beneficially_owned_after": 11633,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    },
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 5111,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 5111,
+      "price": null,
+      "beneficially_owned_after": 20442,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    }
+  ],
+  "total_transaction_value": 1038787.48,
+  "footnotes": [
+    "Each restricted stock unit represents the right to receive, at settlement, one share of common stock. This transaction represents the settlement of restricted stock units in shares of common stock on their scheduled vesting date.",
+    "Shares withheld by Apple to satisfy tax withholding requirements on vesting of restricted stock units.",
+    "This transaction was made pursuant to a Rule 10b5-1 trading plan adopted by the reporting person on November 26, 2024.",
+    "This transaction was executed in multiple trades at prices ranging from $245.41 to $246.36; the price reported above reflects the weighted average sale price. The reporting person hereby undertakes to provide full information regarding the number of shares and prices at which the transactions were effected upon request to the SEC staff, Apple, or a security holder of Apple.",
+    "This transaction was executed in multiple trades at prices ranging from $246.42 to $247.41; the price reported above reflects the weighted average sale price. The reporting person hereby undertakes to provide full information regarding the number of shares and prices at which the transactions were effected upon request to the SEC staff, Apple, or a security holder of Apple.",
+    "This transaction was executed in multiple trades at prices ranging from $247.43 to $248.30; the price reported above reflects the weighted average sale price. The reporting person hereby undertakes to provide full information regarding the number of shares and prices at which the transactions were effected upon request to the SEC staff, Apple, or a security holder of Apple.",
+    "This transaction was executed in multiple trades at prices ranging from $248.52 to $248.89; the price reported above reflects the weighted average sale price. The reporting person hereby undertakes to provide full information regarding the number of shares and prices at which the transactions were effected upon request to the SEC staff, Apple, or a security holder of Apple.",
+    "This award was granted on September 26, 2021. 12.5% of the award vested on April 15, 2022 and the remaining restricted stock units vested 12.5% in semi-annual installments over the four-year period ending October 15, 2025.",
+    "This award was granted on September 25, 2022. 12.5% of the award vested on April 15, 2023 and the remaining restricted stock units vest 12.5% in semi-annual installments over the four-year period ending October 15, 2026, subject to the terms and conditions of the underlying award agreement",
+    "This award was granted on October 1, 2023. 12.5% of the award vested on April 15, 2024 and the remaining restricted stock units vest 12.5% in semi-annual installments over the four-year period ending October 15, 2027, subject to the terms and conditions of the underlying award agreement."
+  ],
+  "parsed_timestamp": "2025-11-01T12:57:54.214374+00:00",
+  "total_calculation_method": "sum of shares_traded * price_per_share for transactions with code in {S, P} (excluded F, M, A, G)"
+}

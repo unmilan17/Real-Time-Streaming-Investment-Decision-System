@@ -1,0 +1,13 @@
+{
+  "ticker": "AAPL",
+  "cik": "0000320193",
+  "doc_type": "filing",
+  "doc_id": "0001631982-25-000009",
+  "date": "2025-10-15",
+  "filing_date": "2025-10-17",
+  "source_file": "0001631982-25-000009.html",
+  "reporting_person": "KONDO CHRIS",
+  "is_amendment": false,
+  "total_transaction_value": 0,
+  "num_transactions": 2
+}

@@ -1,0 +1,6 @@
+requests>=2.31.0
+pymongo>=4.6.0
+lxml>=4.9.3
+python-dotenv
+structlog>=23.1.0
+python-json-logger>=2.0.7

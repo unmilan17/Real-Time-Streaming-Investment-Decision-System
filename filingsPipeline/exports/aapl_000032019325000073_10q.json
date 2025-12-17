@@ -1,0 +1,26 @@
+{
+  "filingId": "69123d9a0043a97657dc7a5b",
+  "metadata": {
+    "cik": "0000320193",
+    "ticker": "AAPL",
+    "accessionNumber": "0000320193-25-000073",
+    "formType": "10-Q",
+    "filingDate": "2025-08-01",
+    "primaryDocument": "aapl-20250628.htm",
+    "documentUrl": "https://www.sec.gov/Archives/edgar/data/0000320193/000032019325000073/aapl-20250628.htm",
+    "baseUrl": "https://www.sec.gov/Archives/edgar/data/0000320193/000032019325000073"
+  },
+  "facts": [
+    {
+      "concept": {
+        "name": "dei:AmendmentFlag",
+        "label": "Amendment Flag",
+        "namespace": "http://xbrl.sec.gov/dei/2023"
+      },
+      "value": "false",
+      "unitRef": null,
+      "decimals": null,
+      "contextRef": "c-1",
+      "isNil": false,
+      "footnotes": [],
+      "filingId": 

@@ -1,0 +1,127 @@
+{
+  "filing_metadata": {
+    "earliest_transaction_date": "2025-10-15",
+    "filing_date": "2025-10-17",
+    "is_amendment": false,
+    "source_file": "0001631982-25-000009.html"
+  },
+  "issuer": {
+    "company_name": "Apple Inc.",
+    "ticker_symbol": "AAPL",
+    "cik": "0000320193"
+  },
+  "reporting_person": {
+    "name": "KONDO CHRIS",
+    "relationship_to_issuer": [
+      "Officer"
+    ],
+    "officer_title": "Principal Accounting Officer",
+    "address": {
+      "street": "ONE APPLE PARK WAY",
+      "city": "CUPERTINO",
+      "state": "CA",
+      "zip": "95014"
+    }
+  },
+  "transactions": [
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "shares_traded": 7371,
+      "acquisition_or_disposition": "A",
+      "price_per_share": null,
+      "shares_owned_after": 22469,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": false
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-15",
+      "transaction_code": "F",
+      "shares_traded": 3619,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 249.34,
+      "shares_owned_after": 18850,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": false
+    }
+  ],
+  "derivative_transactions": [
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 1914,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 1914,
+      "price": null,
+      "beneficially_owned_after": 0,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    },
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 2077,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 2077,
+      "price": null,
+      "beneficially_owned_after": 4155,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    },
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 1898,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 1898,
+      "price": null,
+      "beneficially_owned_after": 7593,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    },
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-15",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 1482,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 1482,
+      "price": null,
+      "beneficially_owned_after": 8890,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    }
+  ],
+  "total_transaction_value": 0.0,
+  "footnotes": [
+    "Each restricted stock unit represents the right to receive, at settlement, one share of common stock. This transaction represents the settlement of restricted stock units in shares of common stock on their scheduled vesting date.",
+    "Shares withheld by Apple to satisfy tax withholding requirements on vesting of restricted stock units. No shares were sold.",
+    "This award was granted on September 26, 2021. 12.5% of the award vested on April 15, 2022 and the remaining restricted stock units vested 12.5% in semi-annual installments over the four-year period ending October 15, 2025.",
+    "This award was granted on September 25, 2022. 12.5% of the award vested on April 15, 2023 and the remaining restricted stock units vest 12.5% in semi-annual installments over the four-year period ending October 15, 2026, subject to the terms and conditions of the underlying award agreement.",
+    "This award was granted on October 1, 2023. 12.5% of the award vested on April 15, 2024 and the remaining restricted stock units vest 12.5% in semi-annual installments over the four-year period ending October 15, 2027, subject to the terms and conditions of the underlying award agreement.",
+    "This award was granted on September 29, 2024. 12.5% of the award vested on April 15, 2025 and the remaining restricted stock units vest 12.5% in semi-annual installments over the four-year period ending October 15, 2028, subject to the terms and conditions of the underlying award agreement."
+  ],
+  "parsed_timestamp": "2025-11-01T12:57:26.878762+00:00",
+  "total_calculation_method": "sum of shares_traded * price_per_share for transactions with code in {S, P} (excluded F, M, A, G)"
+}

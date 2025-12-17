@@ -1,0 +1,105 @@
+{
+  "filing_metadata": {
+    "earliest_transaction_date": "2025-10-01",
+    "filing_date": "2025-10-03",
+    "is_amendment": false,
+    "source_file": "0001767094-25-000009.html"
+  },
+  "issuer": {
+    "company_name": "Apple Inc.",
+    "ticker_symbol": "AAPL",
+    "cik": "0000320193"
+  },
+  "reporting_person": {
+    "name": "O'BRIEN DEIRDRE",
+    "relationship_to_issuer": [
+      "Officer"
+    ],
+    "officer_title": "Senior Vice President",
+    "address": {
+      "street": "ONE APPLE PARK WAY",
+      "city": "CUPERTINO",
+      "state": "CA",
+      "zip": "95014"
+    }
+  },
+  "transactions": [
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-01",
+      "transaction_code": "M",
+      "shares_traded": 92403,
+      "acquisition_or_disposition": "A",
+      "price_per_share": null,
+      "shares_owned_after": 229090,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": false
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-01",
+      "transaction_code": "F",
+      "shares_traded": 49390,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 255.45,
+      "shares_owned_after": 179700,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": false
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-02",
+      "transaction_code": "S",
+      "shares_traded": 41273,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 257.36,
+      "shares_owned_after": 138427,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": true
+    },
+    {
+      "security_title": "Common Stock",
+      "transaction_date": "2025-10-02",
+      "transaction_code": "S",
+      "shares_traded": 1740,
+      "acquisition_or_disposition": "D",
+      "price_per_share": 258.08,
+      "shares_owned_after": 136687,
+      "ownership_type": "D",
+      "rule_10b5_1_plan": true
+    }
+  ],
+  "derivative_transactions": [
+    {
+      "title": "Restricted Stock Unit",
+      "conversion_price": null,
+      "transaction_date": "2025-10-01",
+      "transaction_code": "M",
+      "acquired": 0,
+      "disposed": 92403,
+      "date_exercisable": null,
+      "expiration_date": null,
+      "underlying_title": "Common Stock",
+      "underlying_amount": 92403,
+      "price": null,
+      "beneficially_owned_after": 0,
+      "ownership_form": "D",
+      "nature_of_indirect": null
+    }
+  ],
+  "total_transaction_value": 11071078.48,
+  "footnotes": [
+    "Each restricted stock unit represents the right to receive, at settlement, one share of common stock.",
+    "This transaction represents the settlement of restricted stock units in shares of common stock on their scheduled vesting date.",
+    "Shares withheld by Apple to satisfy tax withholding requirements on vesting of restricted stock units.",
+    "This transaction was made pursuant to a Rule 10b5-1 trading plan adopted by the reporting person on August 27, 2024.",
+    "This transaction was executed in multiple trades at prices ranging from $256.985 to $257.98; the price reported above reflects the weighted average sale price. The reporting person hereby undertakes to provide full information regarding the number of shares and prices at which the transactions were effected upon request to the SEC staff, Apple, or a security holder of Apple.",
+    "This transaction was executed in multiple trades at prices ranging from $257.99 to $258.145; the price reported above reflects the weighted average sale price. The reporting person hereby undertakes to provide full information regarding the number of shares and prices at which the transactions were effected upon request to the SEC staff, Apple, or a security holder of Apple.",
+    "This award was granted on September 25, 2022, for a target number of 66,477 restricted stock units. The award vested on October 1, 2025, applying a percentage of the target number of restricted stock units that was determined based on Apple's total shareholder return (\"TSR\") relative to the other companies in the S&P 500 from the first day of Apple's fiscal year 2023 and ending with the last day of Apple's fiscal year 2025.",
+    "TSR is calculated based on the change in a company's stock price during the performance period, taking into account any dividends paid during that period, which are assumed to be reinvested in the stock. In accordance with the terms of the award, the beginning value used for calculating TSR is the average closing stock price for the first 20 trading days of the performance period. Apple's beginning value was calculated to be $143.67. Similarly, the ending value used for calculating TSR is the average closing price for the final 20 trading days of the performance period. Apple's ending value was calculated to be $244.54.",
+    "This award provided that if Apple's relative TSR performance was ranked at or above the 85th percentile for companies in the S&P 500 for the performance period, 200% of the target number of restricted stock units vest. If Apple's performance was ranked at or above the 55th percentile, 100% of the target number of restricted stock units vest. If Apple's performance was ranked at or above the 25th percentile, 25% of the target number of restricted stock units vest, and if Apple's performance was ranked below the 25th percentile, 0% of the target number of restricted stock units vest. If Apple's performance was between these levels, the portion of the restricted stock units that vest would be determined on a straight-line basis (i.e., linearly interpolated) between the two nearest vesting percentages.",
+    "Apple's TSR for the three-year performance period was 70.22%, which ranked 162 of the 483 companies that were included in the S&P 500 for the performance period and placed Apple in the 66.60th percentile. Therefore, 92,403 restricted stock units subject to performance requirements vested."
+  ],
+  "parsed_timestamp": "2025-11-01T12:57:39.416920+00:00",
+  "total_calculation_method": "sum of shares_traded * price_per_share for transactions with code in {S, P} (excluded F, M, A, G)"
+}
